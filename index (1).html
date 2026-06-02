@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Stock Ventas — Sistema de gestión y punto de venta para pymes. Controlá tu stock, vendé más y cerrá tu caja en segundos."/>
+<meta name="theme-color" content="#315673"/>
+<meta property="og:title" content="Stock Ventas — Gestión para pymes"/>
+<meta property="og:description" content="Controlá tu stock, vendé más y cerrá tu caja en segundos. Funciona en celular, tablet y computadora."/>
+<meta property="og:type" content="website"/>
+<title>Stock Ventas — Sistema de gestión para pymes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --cream:#EEE5D9;
+  --cream-dark:#E2D5C5;
+  --navy:#315673;
+  --navy-dark:#244260;
+  --navy-light:#3E6B8E;
+  --text:#1C2B38;
+  --text2:#4A6275;
+  --text3:#8A9FAE;
+  --green:#2A6049;
+  --green-bg:#DCF0E6;
+  --border:#DDD4C6;
+  --serif:'DM Serif Display',Georgia,serif;
+  --sans:'DM Sans',sans-serif;
+  --radius:12px;
+  --shadow:0 4px 24px rgba(49,86,115,.12);
+  --shadow-lg:0 12px 48px rgba(49,86,115,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--text);background:#fff;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  height:64px;
+}
+.nav-logo{font-family:var(--serif);font-size:22px;color:var(--navy);text-decoration:none}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-size:14px;color:var(--text2);text-decoration:none;font-weight:500;transition:color .15s}
+.nav-links a:hover{color:var(--navy)}
+.nav-cta{
+  background:var(--navy);color:#fff;
+  padding:9px 20px;border-radius:8px;
+  font-size:14px;font-weight:500;
+  text-decoration:none;
+  transition:background .15s;
+  white-space:nowrap;
+}
+.nav-cta:hover{background:var(--navy-dark)}
+.nav-mobile-btn{display:none;background:none;border:none;cursor:pointer;font-size:22px}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  background:linear-gradient(160deg,var(--navy-dark) 0%,var(--navy) 50%,var(--navy-light) 100%);
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+  padding:7rem 2rem 4rem;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-content{position:relative;z-index:1;max-width:760px}
+.hero-badge{
+  display:inline-block;
+  background:rgba(238,229,217,.15);
+  color:var(--cream);
+  border:1px solid rgba(238,229,217,.25);
+  padding:6px 16px;border-radius:20px;
+  font-size:13px;font-weight:500;
+  margin-bottom:1.5rem;letter-spacing:.04em;
+}
+.hero h1{
+  font-family:var(--serif);
+  font-size:clamp(2.5rem,7vw,4.5rem);
+  color:#fff;
+  line-height:1.1;
+  margin-bottom:1.25rem;
+}
+.hero h1 em{color:var(--cream);font-style:normal}
+.hero-sub{
+  font-size:clamp(1rem,2.5vw,1.25rem);
+  color:rgba(255,255,255,.75);
+  margin-bottom:2.5rem;
+  max-width:560px;margin-left:auto;margin-right:auto;
+}
+.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-hero-primary{
+  background:var(--cream);color:var(--navy);
+  padding:14px 32px;border-radius:8px;
+  font-size:15px;font-weight:600;
+  text-decoration:none;
+  transition:all .15s;
+  box-shadow:0 4px 16px rgba(0,0,0,.2);
+}
+.btn-hero-primary:hover{background:#fff;transform:translateY(-1px)}
+.btn-hero-secondary{
+  background:transparent;color:#fff;
+  padding:14px 32px;border-radius:8px;
+  font-size:15px;font-weight:500;
+  text-decoration:none;
+  border:1.5px solid rgba(255,255,255,.4);
+  transition:all .15s;
+}
+.btn-hero-secondary:hover{background:rgba(255,255,255,.08)}
+.hero-note{margin-top:1.5rem;font-size:13px;color:rgba(255,255,255,.45)}
+
+/* ── SECCIONES GENERALES ── */
+section{padding:5rem 2rem}
+.container{max-width:1100px;margin:0 auto}
+.section-label{
+  font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--navy);margin-bottom:.75rem;
+}
+.section-title{
+  font-family:var(--serif);
+  font-size:clamp(1.75rem,4vw,2.75rem);
+  color:var(--text);line-height:1.2;margin-bottom:1rem;
+}
+.section-sub{font-size:1.05rem;color:var(--text2);max-width:580px}
+
+/* ── LOGOS / SOCIAL PROOF ── */
+.proof{
+  background:var(--cream);
+  padding:2rem;
+  text-align:center;
+}
+.proof p{font-size:13px;color:var(--text2);font-weight:500;letter-spacing:.05em;text-transform:uppercase;margin-bottom:1.5rem}
+.proof-items{display:flex;justify-content:center;align-items:center;gap:3rem;flex-wrap:wrap}
+.proof-item{font-family:var(--serif);font-size:18px;color:var(--text3)}
+
+/* ── FEATURES ── */
+.features-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;
+  margin-top:3rem;
+}
+.feature-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:1.75rem;
+  transition:box-shadow .2s,transform .2s;
+}
+.feature-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.feature-icon{
+  width:48px;height:48px;
+  background:var(--cream);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;margin-bottom:1rem;
+}
+.feature-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:.5rem}
+.feature-desc{font-size:14px;color:var(--text2);line-height:1.6}
+
+/* ── CÓMO FUNCIONA ── */
+.how-section{background:var(--cream)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem}
+.step{text-align:center}
+.step-num{
+  width:52px;height:52px;
+  background:var(--navy);color:#fff;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:22px;
+  margin:0 auto 1rem;
+}
+.step-title{font-size:16px;font-weight:600;margin-bottom:.5rem}
+.step-desc{font-size:14px;color:var(--text2)}
+.step-arrow{
+  display:none;
+  align-self:center;
+  font-size:24px;color:var(--text3);
+}
+
+/* ── RUBROS ── */
+.rubros-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1rem;
+  margin-top:2.5rem;
+}
+.rubro-card{
+  background:var(--cream);
+  border-radius:var(--radius);
+  padding:1.5rem 1rem;
+  text-align:center;
+  border:1px solid var(--border);
+  transition:all .15s;
+}
+.rubro-card:hover{background:var(--navy);border-color:var(--navy)}
+.rubro-card:hover .rubro-name{color:#fff}
+.rubro-card:hover .rubro-icon{background:rgba(255,255,255,.15)}
+.rubro-icon{font-size:28px;margin-bottom:.75rem;display:block}
+.rubro-name{font-size:14px;font-weight:500;color:var(--text)}
+
+/* ── PLANES ── */
+.plans-section{background:var(--cream)}
+.plans-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;
+  margin-top:3rem;
+  align-items:start;
+}
+.plan-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:2rem;
+  position:relative;
+  transition:box-shadow .2s;
+}
+.plan-card:hover{box-shadow:var(--shadow-lg)}
+.plan-card.featured{
+  border-color:var(--navy);
+  border-width:2px;
+  transform:scale(1.02);
+  box-shadow:var(--shadow-lg);
+}
+.plan-badge{
+  position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+  background:var(--navy);color:#fff;
+  padding:4px 16px;border-radius:20px;
+  font-size:12px;font-weight:600;white-space:nowrap;
+}
+.plan-name{font-size:14px;font-weight:600;color:var(--text2);letter-spacing:.05em;text-transform:uppercase;margin-bottom:.5rem}
+.plan-price{font-family:var(--serif);font-size:42px;color:var(--navy);line-height:1}
+.plan-price span{font-size:18px;font-family:var(--sans);font-weight:400;color:var(--text2)}
+.plan-period{font-size:13px;color:var(--text3);margin-bottom:1.5rem}
+.plan-annual{font-size:13px;color:var(--green);font-weight:500;margin-bottom:1.5rem;background:var(--green-bg);padding:6px 12px;border-radius:6px}
+.plan-features{list-style:none;margin-bottom:1.75rem}
+.plan-features li{
+  font-size:14px;color:var(--text2);
+  padding:6px 0;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:8px;
+}
+.plan-features li:last-child{border-bottom:none}
+.plan-features li::before{content:'✓';color:var(--green);font-weight:600;flex-shrink:0}
+.plan-features li.no::before{content:'—';color:var(--text3)}
+.btn-plan{
+  display:block;width:100%;
+  padding:12px;border-radius:8px;
+  font-size:14px;font-weight:600;
+  text-align:center;text-decoration:none;
+  transition:all .15s;border:none;cursor:pointer;
+  font-family:var(--sans);
+}
+.btn-plan-primary{background:var(--navy);color:#fff}
+.btn-plan-primary:hover{background:var(--navy-dark)}
+.btn-plan-secondary{background:var(--cream);color:var(--navy);border:1px solid var(--border)}
+.btn-plan-secondary:hover{background:var(--cream-dark)}
+.plans-note{text-align:center;margin-top:1.5rem;font-size:13px;color:var(--text2)}
+
+/* ── TESTIMONIOS ── */
+.testimonials-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;margin-top:3rem;
+}
+.testimonial{
+  background:var(--cream);
+  border-radius:var(--radius);
+  padding:1.5rem;
+  border:1px solid var(--border);
+}
+.testimonial-text{font-size:15px;color:var(--text);line-height:1.6;margin-bottom:1rem;font-style:italic}
+.testimonial-author{font-size:13px;font-weight:600;color:var(--navy)}
+.testimonial-role{font-size:12px;color:var(--text2)}
+.stars{color:#F5A623;font-size:14px;margin-bottom:.75rem}
+
+/* ── FAQ ── */
+.faq-list{max-width:720px;margin:2.5rem auto 0}
+.faq-item{border-bottom:1px solid var(--border);padding:1.25rem 0}
+.faq-q{
+  font-size:16px;font-weight:500;color:var(--text);
+  cursor:pointer;display:flex;justify-content:space-between;align-items:center;
+  gap:1rem;
+}
+.faq-q::after{content:'+';font-size:22px;color:var(--navy);flex-shrink:0;transition:transform .2s}
+.faq-item.open .faq-q::after{transform:rotate(45deg)}
+.faq-a{font-size:14px;color:var(--text2);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s}
+.faq-item.open .faq-a{max-height:300px;padding-top:.75rem}
+
+/* ── CTA FINAL ── */
+.cta-section{
+  background:linear-gradient(135deg,var(--navy-dark),var(--navy));
+  text-align:center;padding:6rem 2rem;
+}
+.cta-section h2{font-family:var(--serif);font-size:clamp(2rem,5vw,3rem);color:#fff;margin-bottom:1rem}
+.cta-section p{font-size:1.1rem;color:rgba(255,255,255,.7);margin-bottom:2.5rem}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--text);color:rgba(255,255,255,.5);
+  padding:3rem 2rem;
+}
+.footer-inner{
+  max-width:1100px;margin:0 auto;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;
+}
+.footer-logo{font-family:var(--serif);font-size:20px;color:#fff}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+.footer-links a{font-size:13px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s}
+.footer-links a:hover{color:#fff}
+.footer-copy{font-size:12px;width:100%;text-align:center;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);margin-top:1.5rem}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .features-grid,.plans-grid,.testimonials-grid{grid-template-columns:1fr}
+  .rubros-grid{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:1fr;gap:1.5rem}
+  .plan-card.featured{transform:none}
+  .nav-links{display:none}
+}
+@media(max-width:600px){
+  nav{padding:0 1rem}
+  .hero{padding:6rem 1.25rem 3rem}
+  .hero-actions{flex-direction:column;align-items:center}
+  .btn-hero-primary,.btn-hero-secondary{width:100%;text-align:center}
+  section{padding:3.5rem 1.25rem}
+  .rubros-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-inner{flex-direction:column;text-align:center}
+  .footer-links{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Stock Ventas</a>
+  <div class="nav-links">
+    <a href="#features">Funciones</a>
+    <a href="#como-funciona">Cómo funciona</a>
+    <a href="#planes">Planes</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <a href="stock-ventas.html" class="nav-cta">Empezar gratis →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">✦ Sistema de gestión para pymes</div>
+    <h1>Vendé más.<br/><em>Perdé menos.</em><br/>Gestioná todo.</h1>
+    <p class="hero-sub">Stock Ventas es el sistema de punto de venta que se adapta a tu negocio. Controlá tu stock, cobrá con cualquier método y cerrá la caja en segundos.</p>
+    <div class="hero-actions">
+      <a href="stock-ventas.html" class="btn-hero-primary">Empezar gratis 14 días</a>
+      <a href="#planes" class="btn-hero-secondary">Ver planes y precios</a>
+    </div>
+    <p class="hero-note">Sin tarjeta de crédito · Sin instalaciones · Funciona en cualquier dispositivo</p>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<div class="proof">
+  <p>Diseñado para cualquier tipo de negocio</p>
+  <div class="proof-items">
+    <span class="proof-item">🏪 Supermercados</span>
+    <span class="proof-item">🏭 Fábricas</span>
+    <span class="proof-item">💊 Farmacias</span>
+    <span class="proof-item">🍽️ Restaurantes</span>
+    <span class="proof-item">🔧 Talleres</span>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <div class="section-label">Funcionalidades</div>
+    <h2 class="section-title">Todo lo que tu negocio necesita en un solo lugar</h2>
+    <p class="section-sub">Sin planillas de Excel. Sin papeles. Sin perder tiempo.</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📦</div>
+        <div class="feature-title">Control de stock en tiempo real</div>
+        <div class="feature-desc">Sabé exactamente cuánto tenés de cada producto. Recibí alertas automáticas cuando el stock está por agotarse.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏪</div>
+        <div class="feature-title">Punto de venta con carrito</div>
+        <div class="feature-desc">Escaneá códigos de barras, agregá múltiples productos al carrito y cobrá en segundos con cualquier método de pago.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💳</div>
+        <div class="feature-title">Múltiples métodos de pago</div>
+        <div class="feature-desc">Efectivo, transferencia y tarjeta. El sistema calcula el vuelto automáticamente y registra todo.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🖨️</div>
+        <div class="feature-title">Tickets imprimibles</div>
+        <div class="feature-desc">Generá tickets profesionales con el nombre de tu negocio, detalle de la compra, método de pago y vuelto.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <div class="feature-title">Reportes y dashboard</div>
+        <div class="feature-desc">Analizá tus ventas por fecha, método de pago, categoría o vendedor. Exportá todo a Excel con un clic.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏷️</div>
+        <div class="feature-title">Ajuste de precios por proveedor</div>
+        <div class="feature-desc">Actualizá precios de todos los productos de un proveedor o categoría con un solo porcentaje. Sin tocar uno por uno.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👥</div>
+        <div class="feature-title">Multi usuario</div>
+        <div class="feature-desc">Agregá cajeros y vendedores con sus propias cuentas. Cada venta queda registrada con el nombre del responsable.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <div class="feature-title">Funciona en cualquier dispositivo</div>
+        <div class="feature-desc">Celular, tablet o computadora. Instalalo como app en el celular sin pasar por ninguna tienda de aplicaciones.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌎</div>
+        <div class="feature-title">Multiidioma y multimoneda</div>
+        <div class="feature-desc">Disponible en español, inglés y portugués. Configurá la moneda de tu país con su símbolo propio.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section id="como-funciona" class="how-section">
+  <div class="container">
+    <div class="section-label">Proceso</div>
+    <h2 class="section-title">Empezar es muy simple</h2>
+    <p class="section-sub">En menos de 5 minutos tu negocio está funcionando.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Creás tu cuenta</div>
+        <div class="step-desc">Registrate con tu email, el nombre de tu negocio y el tipo de rubro. Tenés 14 días de prueba gratis sin tarjeta.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">Cargás tus productos</div>
+        <div class="step-desc">Ingresás el código, nombre, precio y stock de cada producto. Si tenés un lector de códigos de barras, escaneás directamente.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">Empezás a vender</div>
+        <div class="step-desc">Escaneás el producto, elegís el método de pago, y el sistema calcula el vuelto y descuenta el stock solo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RUBROS -->
+<section>
+  <div class="container">
+    <div class="section-label">Rubros</div>
+    <h2 class="section-title">Adaptado a tu tipo de negocio</h2>
+    <p class="section-sub">Stock Ventas se adapta a cualquier rubro. No importa si vendés productos, servicios o fabricás.</p>
+    <div class="rubros-grid">
+      <div class="rubro-card">
+        <span class="rubro-icon">🏪</span>
+        <div class="rubro-name">Supermercado</div>
+      </div>
+      <div class="rubro-card">
+        <span class="rubro-icon">🏭</span>
+        <div class="rubro-name">Fábrica</div>
+      </div>
+      <div class="rubro-card">
+        <span class="rubro-icon">💊</span>
+        <div class="rubro-name">Farmacia</div>
+      </div>
+      <div class="rubro-card">
+        <span class="rubro-icon">🍽️</span>
+        <div class="rubro-name">Restaurant</div>
+      </div>
+      <div class="rubro-card">
+        <span class="rubro-icon">🔧</span>
+        <div class="rubro-name">Taller</div>
+      </div>
+      <div class="rubro-card">
+        <span class="rubro-icon">👗</span>
+        <div class="rubro-name">Indumentaria</div>
+      </div>
+      <div class="rubro-card">
+        <span class="rubro-icon">🛒</span>
+        <div class="rubro-name">Comercio</div>
+      </div>
+      <div class="rubro-card">
+        <span class="rubro-icon">📐</span>
+        <div class="rubro-name">Ferretería</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANES -->
+<section id="planes" class="plans-section">
+  <div class="container">
+    <div class="section-label">Precios</div>
+    <h2 class="section-title">Planes para cada tamaño de negocio</h2>
+    <p class="section-sub">Empezá gratis 14 días. Sin tarjeta. Cancelás cuando quieras.</p>
+
+    <div class="plans-grid">
+
+      <!-- Básico -->
+      <div class="plan-card">
+        <div class="plan-name">Básico</div>
+        <div class="plan-price">$15<span>/mes</span></div>
+        <div class="plan-period">o $150/año — 2 meses gratis</div>
+        <div class="plan-annual">Ahorrás $30 pagando anual</div>
+        <ul class="plan-features">
+          <li>1 usuario / cajero</li>
+          <li>Productos ilimitados</li>
+          <li>Punto de venta completo</li>
+          <li>Control de stock</li>
+          <li>Reportes básicos</li>
+          <li>Ticket imprimible</li>
+          <li>Soporte por WhatsApp</li>
+          <li class="no">Sin servidor en la nube</li>
+          <li class="no">Sin multi usuario</li>
+        </ul>
+        <a href="stock-ventas.html" class="btn-plan btn-plan-secondary">Empezar gratis</a>
+      </div>
+
+      <!-- Pro -->
+      <div class="plan-card featured">
+        <div class="plan-badge">⭐ Más elegido</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">$30<span>/mes</span></div>
+        <div class="plan-period">o $280/año — 2 meses gratis</div>
+        <div class="plan-annual">Ahorrás $80 pagando anual</div>
+        <ul class="plan-features">
+          <li>Hasta 3 usuarios</li>
+          <li>Productos ilimitados</li>
+          <li>Punto de venta completo</li>
+          <li>Control de stock</li>
+          <li>Reportes avanzados + Excel</li>
+          <li>Ticket imprimible</li>
+          <li>Datos en la nube</li>
+          <li>Backup automático</li>
+          <li>Soporte prioritario</li>
+        </ul>
+        <a href="stock-ventas.html" class="btn-plan btn-plan-primary">Empezar gratis</a>
+      </div>
+
+      <!-- Negocio -->
+      <div class="plan-card">
+        <div class="plan-name">Negocio</div>
+        <div class="plan-price">$55<span>/mes</span></div>
+        <div class="plan-period">o $500/año — 2 meses gratis</div>
+        <div class="plan-annual">Ahorrás $160 pagando anual</div>
+        <ul class="plan-features">
+          <li>Usuarios ilimitados</li>
+          <li>Productos ilimitados</li>
+          <li>Punto de venta completo</li>
+          <li>Control de stock</li>
+          <li>Reportes avanzados + Excel</li>
+          <li>Ticket imprimible</li>
+          <li>Datos en la nube</li>
+          <li>Backup automático</li>
+          <li>Soporte mismo día</li>
+        </ul>
+        <a href="stock-ventas.html" class="btn-plan btn-plan-secondary">Empezar gratis</a>
+      </div>
+
+    </div>
+    <p class="plans-note">Todos los planes incluyen 14 días de prueba gratuita · Sin permanencia · Cancelás cuando quieras</p>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section>
+  <div class="container">
+    <div class="section-label">Testimonios</div>
+    <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Antes cerraba la caja en 30 minutos contando todo a mano. Ahora lo hago en 2 minutos y sé exactamente cuánto entró por cada método de pago."</p>
+        <div class="testimonial-author">Carlos M.</div>
+        <div class="testimonial-role">Supermercado, Argentina</div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Lo que más me gustó es que se adaptó a mi fábrica de portones. Manejo los materiales, los productos terminados y las órdenes desde el mismo sistema."</p>
+        <div class="testimonial-author">Roberto G.</div>
+        <div class="testimonial-role">Fábrica de portones, Uruguay</div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Pensé que iba a ser complicado pero en 10 minutos ya estaba vendiendo. Mis empleados lo aprendieron solos. Vale cada centavo."</p>
+        <div class="testimonial-author">Ana P.</div>
+        <div class="testimonial-role">Farmacia, Chile</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:var(--cream)">
+  <div class="container">
+    <div class="section-label">Preguntas frecuentes</div>
+    <h2 class="section-title">Todo lo que necesitás saber</h2>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">¿Necesito instalar algo?</div>
+        <div class="faq-a">No. Stock Ventas funciona directamente desde el navegador en cualquier dispositivo. Si querés, podés instalarlo como app en tu celular con un solo toque, sin pasar por ninguna tienda de aplicaciones.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">¿Funciona sin internet?</div>
+        <div class="faq-a">El plan Básico guarda los datos en el dispositivo y puede funcionar sin internet. Los planes Pro y Negocio sincronizan los datos en la nube, por lo que necesitan conexión para sincronizar, aunque pueden operar offline temporalmente.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">¿Puedo usarlo en mi celular?</div>
+        <div class="faq-a">Sí. Stock Ventas está diseñado para funcionar perfectamente en celulares, tablets y computadoras. Podés instalarlo como app en tu celular Android o iPhone.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">¿Qué pasa cuando termina el período de prueba?</div>
+        <div class="faq-a">Al terminar los 14 días podés elegir el plan que más te convenga. Tus datos no se borran. Si decidís no continuar, podés exportar toda tu información antes.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">¿Puedo tener más de un negocio?</div>
+        <div class="faq-a">Cada cuenta es un negocio independiente. Si tenés varios negocios, podés crear una cuenta por cada uno con el mismo email o con emails diferentes.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">¿En qué países funciona?</div>
+        <div class="faq-a">En cualquier país del mundo. El sistema está disponible en español, inglés y portugués, y podés configurar la moneda de tu país con su símbolo propio.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">¿Cómo cancelo mi suscripción?</div>
+        <div class="faq-a">Podés cancelar cuando quieras desde la sección de configuración de tu cuenta. No hay permanencia mínima ni penalidades.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Tu negocio merece un sistema profesional</h2>
+    <p>Empezá gratis hoy. Sin tarjeta de crédito. Sin complicaciones.</p>
+    <a href="stock-ventas.html" class="btn-hero-primary">Crear mi cuenta gratis →</a>
+    <p style="margin-top:1rem;font-size:13px;color:rgba(255,255,255,.4)">14 días de prueba · Cancelás cuando quieras · Soporte incluido</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Stock Ventas</div>
+    <div class="footer-links">
+      <a href="#features">Funciones</a>
+      <a href="#planes">Precios</a>
+      <a href="#faq">FAQ</a>
+      <a href="stock-ventas.html">Ingresar</a>
+      <a href="mailto:contacto@stockventas.com">Contacto</a>
+    </div>
+    <div class="footer-copy">
+      © 2026 Stock Ventas. Todos los derechos reservados.
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(el){
+  const item=el.parentElement;
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
+}
+
+// Animación de entrada al hacer scroll
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.style.opacity='1';
+      e.target.style.transform='translateY(0)';
+    }
+  });
+},{threshold:0.1});
+
+document.querySelectorAll('.feature-card,.plan-card,.step,.testimonial,.rubro-card').forEach(el=>{
+  el.style.opacity='0';
+  el.style.transform='translateY(20px)';
+  el.style.transition='opacity .5s ease, transform .5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
